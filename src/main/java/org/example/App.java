@@ -15,18 +15,13 @@ public class App {
         SessionFactory sessionFactory = configuration.buildSessionFactory();
         try (Session session = sessionFactory.getCurrentSession()) {
             session.beginTransaction();
-            Item ball = new Item(null, "ball");
-            Item phone = new Item(null, "phone");
-            Item plate = new Item(null, "plate");
-            session.save(ball);
-            session.save(phone);
-            session.save(plate);
-            Person p1 = new Person("Tom", 30);
+
+            // Person p1 = new Person("Tom", 30);
             Person p2 = new Person("Jack", 43);
-            ball.setOwner(p1);
-            p1.addItem(ball);
-            session.save(p1);
-            session.save(ball);
+            session.save(p2);
+            Item ball = session.get(Item.class, 7);
+            ball.setOwner(p2);
+            p2.addItem(ball);
 
 
             session.getTransaction().commit();
